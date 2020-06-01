@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<!--<script src="https://cdn.jsdelivr.net/npm/vue@2.6.11"></script> for production-->
+		<link type="text/css" rel="stylesheet" href="https://unpkg.com/bootstrap@latest/dist/css/bootstrap.min.css" />
+		<link type="text/css" rel="stylesheet" href="http://unpkg.com/bootstrap-vue@latest/dist/bootstrap-vue.min.css" />
+		<script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+	</head>
+	<body>
+		<div id = "app">
+			{{testData}}
+			<div class = "header">
+			<!-- V1, vanilla add stuff table.  -->
+				<label for="name">Name:</label>
+				<input type="text" v-model = "workLink.name" name = "name">
+				<label for="Icon">Icon:</label>
+				<input type="text" v-model = "workLink.iconPath" name = "Icon">
+				<label for="Link">Link Address:</label>
+				<input type="text" v-model = "workLink.linkPath" name = "Link">
+				<button @click = "addLink">Test</button>
+			</div>
+			<div class = "FavLinks">
+			<!--V1,  vanilla table. with a edit/delete button.-->
+				<table class = "linkTable">
+					<thead>
+						<tr>
+							<th>id</th>
+							<th>Name</th>
+							<th>Icon</th>
+							<th>Link Address</th>
+							<th>Date Created</th>
+							<th>Edit</th>
+							<th>Delete</th>
+						</tr>
+					</thead>
+					<tbody>
+						<tr v-for = "(link,index) in links">
+							<td>{{index}}</td>
+							<td>{{link.name}}</td>
+							<td>{{link.iconPath}}</td>
+							<td>{{link.linkPath}}</td>
+							<td>{{link.dateCreated}}</td>
+							<td>Edit</td>
+							<td><button @click = deleteLink(index)>Delete</button></td>
+						</tr>
+					</tbody>
+				</table>
+			</div>
+		</div>
+	</body>
+<script src = "./js/main.js" defer></script>
+</html>
