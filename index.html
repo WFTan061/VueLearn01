@@ -8,16 +8,29 @@
 	</head>
 	<body>
 		<div id = "app">
-			{{testData}}
 			<div class = "header">
-			<!-- V1, vanilla add stuff table.  -->
+				<h1 v-if = "editing">Editing</h1>
+				<h1 v-else = "editing">Adding</h1>
+				<!-- id field, uneditable-->
+				<label v-if="editing" for = "id">ID: </label>
+				<input type ="text" v-if="editing" v-model = "toEdit" name = "id" readOnly>
+
+				<!-- name field-->
 				<label for="name">Name:</label>
 				<input type="text" v-model = "workLink.name" name = "name">
+
+				<!-- icon path field-->
 				<label for="Icon">Icon:</label>
 				<input type="text" v-model = "workLink.iconPath" name = "Icon">
+
+				<!-- link address field-->
 				<label for="Link">Link Address:</label>
 				<input type="text" v-model = "workLink.linkPath" name = "Link">
-				<button @click = "addLink">Test</button>
+
+				<button v-if = "editing" @click = "editLink">Edit</button>
+				<button v-if = "editing" @click = "cancelEdit">Cancel Edit</button>
+
+				<button v-else="editing" @click = "addLink">Add</button>
 			</div>
 			<div class = "FavLinks">
 			<!--V1,  vanilla table. with a edit/delete button.-->
@@ -40,7 +53,7 @@
 							<td>{{link.iconPath}}</td>
 							<td>{{link.linkPath}}</td>
 							<td>{{link.dateCreated}}</td>
-							<td>Edit</td>
+							<td><button @click = toEditLink(index)>Edit</td>
 							<td><button @click = deleteLink(index)>Delete</button></td>
 						</tr>
 					</tbody>

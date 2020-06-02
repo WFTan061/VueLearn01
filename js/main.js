@@ -38,7 +38,9 @@ app = new Vue({
 			{
 				key:''
 			}
-		]
+		],
+		editing:false,
+		toEdit:-1,
 	},
 	methods:{
 		addLink: function(){
@@ -47,6 +49,19 @@ app = new Vue({
 		},
 		deleteLink: function(index){
 			this.links.splice(index,1);
+		},
+		toEditLink: function(index){
+			this.editing = true
+			this.toEdit = index;
+			this.workLink = {...this.links[this.toEdit]};
+		},
+		cancelEdit:function(){
+			this.editing = false;
+		},
+		editLink:function(){
+			this.links[this.toEdit] = {...this.workLink};
+			this.editing = false;
+			this.workLink = cleanForm;
 		}
 	}
 })
