@@ -5,7 +5,7 @@ var cleanForm = {
 	dataCreated:"",
 }
 app = new Vue({
-	el:"#app",
+	el:'#app',
 	data:{
 		links:[
 			{
@@ -45,8 +45,21 @@ app = new Vue({
 	methods:{
 		addLink: function(){
 			let theDate = new Date();
-			this.links.push({...this.workLink,dateCreated:theDate});
-			this.workLink = cleanForm;
+			let newObject = {};
+			let keys = Object.keys(this.workLink);
+			console.log(keys);
+			for(key in keys){
+				newObject[keys[key]] = this.workLink[keys[key]];
+			}
+			console.log(this.workLink);
+			newObject.dateCreated = theDate;
+			console.log(newObject);
+			this.links.push(newObject);
+			this.workLink = {
+				name:"",
+				iconPath:"",
+				linkPath:"",
+				dataCreated:""};
 		},
 		deleteLink: function(index){
 			this.links.splice(index,1);
@@ -54,15 +67,29 @@ app = new Vue({
 		toEditLink: function(index){
 			this.editing = true
 			this.toEdit = index;
-			this.workLink = {...this.links[this.toEdit]};
+			let keys = Object.keys(this.links[this.toEdit]);
+			console.log(keys);
+			for(key in keys){
+				this.workLink[keys[key]] = this.links[this.toEdit][keys[key]];
+			}
+			// this.workLink = {...this.links[this.toEdit]};
 		},
 		cancelEdit:function(){
 			this.editing = false;
 		},
 		editLink:function(){
-			this.links[this.toEdit] = {...this.workLink,dateCreated:this.links[this.toEdit].dateCreated};
+			let keys = Object.keys(this.links[this.toEdit]);
+			for(key in keys){
+				this.links[this.toEdit][keys[key]] = this.workLink[keys[key]];
+			}
+			// this.links[this.toEdit] = {...this.workLink,dateCreated:this.links[this.toEdit].dateCreated};
 			this.editing = false;
-			this.workLink = cleanForm;
+			this.toEdit = -1;
+			this.workLink = {
+				name:"",
+				iconPath:"",
+				linkPath:"",
+				dataCreated:""};
 		}
 	}
 })

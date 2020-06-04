@@ -8,7 +8,7 @@
 		<script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
 	</head>
 	<body>
-		<div id = "app" class = "container-fluid">
+		<div id = 'app' class = "container-fluid">
 			<div class = "header">
 				<h1 v-if = "editing">Editing Link</h1>
 				<h1 v-else = "editing">Adding Link</h1>
@@ -57,7 +57,7 @@
 							<!-- <td>{{link.iconPath}}</td> -->
 							<td class = "col-3 text-truncate" v-bind:id = "'linkPath' + index">{{link.linkPath}}</td>
 							<td class = "col-3">{{link.dateCreated}}</td>
-							<td class = "col-1"><button @click = toEditLink(index)>Edit</td>
+							<td class = "col-1"><button @click = toEditLink(index)>Edit</button></td>
 							<td class = "col-1"><button @click = deleteLink(index)>Delete</button></td>
 							<td class = "col-2">
 								<a v-bind:href="link.linkPath">
