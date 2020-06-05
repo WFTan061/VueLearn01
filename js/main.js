@@ -47,13 +47,13 @@ app = new Vue({
 			let theDate = new Date();
 			let newObject = {};
 			let keys = Object.keys(this.workLink);
-			console.log(keys);
+			// console.log(keys);
 			for(key in keys){
 				newObject[keys[key]] = this.workLink[keys[key]];
 			}
-			console.log(this.workLink);
+			// console.log(this.workLink);
 			newObject.dateCreated = theDate;
-			console.log(newObject);
+			// console.log(newObject);
 			this.links.push(newObject);
 			this.workLink = {
 				name:"",
@@ -62,13 +62,24 @@ app = new Vue({
 				dataCreated:""};
 		},
 		deleteLink: function(index){
+			if(this.toEdit === index){
+				this.editing = false;
+				this.workLink = {
+					name:"",
+					iconPath:"",
+					linkPath:"",
+					dataCreated:""};
+				this.toEditLink = -1;
+			}else if(this.toEdit > index){
+				this.toEdit = this.toEdit - 1;
+			}
 			this.links.splice(index,1);
 		},
 		toEditLink: function(index){
 			this.editing = true
 			this.toEdit = index;
 			let keys = Object.keys(this.links[this.toEdit]);
-			console.log(keys);
+			// console.log(keys);
 			for(key in keys){
 				this.workLink[keys[key]] = this.links[this.toEdit][keys[key]];
 			}
