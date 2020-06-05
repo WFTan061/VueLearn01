@@ -69,7 +69,7 @@ app = new Vue({
 					iconPath:"",
 					linkPath:"",
 					dataCreated:""};
-				this.toEditLink = -1;
+				this.toEdit = -1;
 			}else if(this.toEdit > index){
 				this.toEdit = this.toEdit - 1;
 			}
@@ -83,7 +83,6 @@ app = new Vue({
 			for(key in keys){
 				this.workLink[keys[key]] = this.links[this.toEdit][keys[key]];
 			}
-			// this.workLink = {...this.links[this.toEdit]};
 		},
 		cancelEdit:function(){
 			this.editing = false;
@@ -93,7 +92,6 @@ app = new Vue({
 			for(key in keys){
 				this.links[this.toEdit][keys[key]] = this.workLink[keys[key]];
 			}
-			// this.links[this.toEdit] = {...this.workLink,dateCreated:this.links[this.toEdit].dateCreated};
 			this.editing = false;
 			this.toEdit = -1;
 			this.workLink = {
